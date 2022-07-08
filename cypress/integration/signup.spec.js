@@ -3,7 +3,7 @@ import signupPage from '../support/pages/signup'
 
 describe('cadastro', function () {
 
-    context('quando o usuário é novato', function () {
+    context.only('Quando o usuário é novato', function () {
         const user = {
             name: 'Julio Cesar',
             email: 'julio@outlook.com',
@@ -25,7 +25,7 @@ describe('cadastro', function () {
         })
     })
 
-    context('quando o email ja existe', function () {
+    context('Quando o email ja existe', function () {
         const user = {
             name: 'João Pedro',
             email: 'Pedrinho@outlook.com',
@@ -74,7 +74,7 @@ describe('cadastro', function () {
         })
     })
 
-    context(' quando a senha é muito curta', function () {
+    context('Quando a senha é muito curta', function () {
 
         const password = ['1', '1a', 'ab3', 'abc4', 'ab#c5']
 
@@ -83,7 +83,7 @@ describe('cadastro', function () {
         })
 
         password.forEach(function (p) {
-            it.only('não deve cadastrar com senha: ' + p, function () {
+            it('não deve cadastrar com senha: ' + p, function () {
 
                 const user = {
                     name: 'Jasson Friday', email: 'jasson@gmail.com', password: p
@@ -96,6 +96,26 @@ describe('cadastro', function () {
 
         afterEach(function () {
             signupPage.alertHaveText('Pelo menos 6 caracteres')
+        })
+    })
+
+    context('Qundo não preencho nenhum dos campos', function(){
+
+        const alertMessages = [
+            'Nome é obrigatório',
+            'E-mail é obrigatório',
+            'Senha é obrigatória'            
+        ]
+
+        before(function(){
+            signupPage.go()
+            signupPage.submit()
+        })
+
+        alertMessages.forEach(function(alert){
+            it('deve exibir ' + alert.toLowerCase(), function(){
+                signupPage.alertHaveText(alert)
+            })
         })
     })
 })
