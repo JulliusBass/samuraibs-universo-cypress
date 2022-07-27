@@ -3,7 +3,7 @@ import signupPage from '../support/pages/signup'
 
 describe('cadastro', function () {
 
-    context.only('Quando o usuário é novato', function () {
+    context('Quando o usuário é novato', function () {
         const user = {
             name: 'Julio Cesar',
             email: 'julio@outlook.com',
